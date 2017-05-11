@@ -12,7 +12,6 @@ CMD ["/usr/sbin/sshd", "-D"]
 
 RUN apt-get install -y git
 RUN mkdir /root/.ssh
-RUN chmod 0600 /root/.ssh/*
 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
