@@ -6,7 +6,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E03280
     apt-get update && \
     apt-get install -yq curl && \
     curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
-    curl -O /opt/github-release.tar.bz2 -sL https://github.com/aktau/github-release/releases/download/v0.7.2/linux-amd64-github-release.tar.bz2 && \
+    curl -o /opt/github-release.tar.bz2 -sL https://github.com/aktau/github-release/releases/download/v0.7.2/linux-amd64-github-release.tar.bz2 && \
     dpkg --add-architecture i386 && \
     apt-get update && \
     apt-get install -yq tzdata mono-complete openssh-server openjdk-8-jre \
