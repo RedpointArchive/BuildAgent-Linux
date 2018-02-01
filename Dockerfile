@@ -19,7 +19,6 @@ RUN apt-get update && \
         lib32ncurses5 lib32z1 libc6-i386 libc6-dev-i386 lib32gcc1 lib32stdc++6 \
         g++-multilib && \
     mkdir /var/run/sshd && \
-    sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
     sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd && \
     echo "export VISIBLE=now" >> /etc/profile && \
     mkdir /root/.ssh && \
@@ -27,5 +26,6 @@ RUN apt-get update && \
     ln -s /bin/bash /bin/sh && \
     cd /opt && tar -xvf github-release.tar.bz2
 ENV NOTVISIBLE "in users profile"
+COPY sshd_config /etc/ssh/sshd_config
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D", "-e"]
