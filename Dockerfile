@@ -11,9 +11,9 @@ RUN apt-get update && \
     curl -o /opt/github-release.tar.bz2 -sL https://github.com/aktau/github-release/releases/download/v0.7.2/linux-amd64-github-release.tar.bz2 && \
     dpkg --add-architecture i386 && \
     apt-get update
-RUN apt search libsodium
-RUN apt-get install -yq tzdata openssh-server openjdk-8-jre \
-        git nodejs xserver-xorg-video-dummy libgl1-mesa-dri libgl1-mesa-glx \
+RUN apt-get update && \
+    apt-get install -yq tzdata openssh-server openjdk-8-jre \
+        git xserver-xorg-video-dummy libgl1-mesa-dri libgl1-mesa-glx \
         libglapi-mesa mesa-utils alsa-base alsa-utils zip unzip libsodium-dev \
         libsodium23 libsodium-dev:i386 libsodium23:i386 swig gcc libc6-dev-i386 \
         binutils gcc-multilib cmake libstdc++6:i386 libssl-dev libssl-dev:i386 lua5.3 \
@@ -32,6 +32,8 @@ EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D", "-e"]
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -; \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
+RUN apt-get install -y nodejs
 RUN apt-get update
 RUN apt-get install -yq yarn
 RUN curl -sS https://packages.microsoft.com/keys/microsoft.asc | apt-key add -; \
