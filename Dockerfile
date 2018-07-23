@@ -41,3 +41,7 @@ RUN curl -sS https://packages.microsoft.com/keys/microsoft.asc | apt-key add -; 
 RUN apt-get update
 RUN apt-get install -yq powershell-preview
 RUN ln -s /usr/bin/pwsh-preview /usr/bin/pwsh
+RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
+    echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
+    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
+    apt-get update && apt-get -y install google-cloud-sdk
